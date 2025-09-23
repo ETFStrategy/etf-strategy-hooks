@@ -7,7 +7,7 @@ import {Constants} from "infinity-core/test/pool-cl/helpers/Constants.sol";
 import {Currency} from "infinity-core/src/types/Currency.sol";
 import {PoolKey} from "infinity-core/src/types/PoolKey.sol";
 import {CLPoolParametersHelper} from "infinity-core/src/pool-cl/libraries/CLPoolParametersHelper.sol";
-import {CLCounterHook} from "../../src/pool-cl/CLCounterHook.sol";
+import {CLCounterHook} from "../../src/hooks/CLCounterHook.sol";
 import {CLTestUtils} from "./utils/CLTestUtils.sol";
 import {CLPoolParametersHelper} from "infinity-core/src/pool-cl/libraries/CLPoolParametersHelper.sol";
 import {PoolIdLibrary} from "infinity-core/src/types/PoolId.sol";
@@ -34,7 +34,8 @@ contract CLCounterHookTest is Test, CLTestUtils {
             poolManager: poolManager,
             fee: uint24(3000), // 0.3% fee
             // tickSpacing: 10
-            parameters: bytes32(uint256(hook.getHooksRegistrationBitmap())).setTickSpacing(10)
+            parameters: bytes32(uint256(hook.getHooksRegistrationBitmap()))
+                .setTickSpacing(10)
         });
 
         // initialize pool at 1:1 price point (assume stablecoin pair)

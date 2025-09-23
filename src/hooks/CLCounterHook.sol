@@ -20,25 +20,31 @@ contract CLCounterHook is CLBaseHook {
 
     constructor(ICLPoolManager _poolManager) CLBaseHook(_poolManager) {}
 
-    function getHooksRegistrationBitmap() external pure override returns (uint16) {
-        return _hooksRegistrationBitmapFrom(
-            Permissions({
-                beforeInitialize: false,
-                afterInitialize: false,
-                beforeAddLiquidity: true,
-                afterAddLiquidity: true,
-                beforeRemoveLiquidity: false,
-                afterRemoveLiquidity: false,
-                beforeSwap: true,
-                afterSwap: true,
-                beforeDonate: false,
-                afterDonate: false,
-                beforeSwapReturnDelta: false,
-                afterSwapReturnDelta: false,
-                afterAddLiquidityReturnDelta: false,
-                afterRemoveLiquidityReturnDelta: false
-            })
-        );
+    function getHooksRegistrationBitmap()
+        external
+        pure
+        override
+        returns (uint16)
+    {
+        return
+            _hooksRegistrationBitmapFrom(
+                Permissions({
+                    beforeInitialize: false,
+                    afterInitialize: false,
+                    beforeAddLiquidity: true,
+                    afterAddLiquidity: true,
+                    beforeRemoveLiquidity: false,
+                    afterRemoveLiquidity: false,
+                    beforeSwap: true,
+                    afterSwap: true,
+                    beforeDonate: false,
+                    afterDonate: false,
+                    beforeSwapReturnDelta: false,
+                    afterSwapReturnDelta: false,
+                    afterAddLiquidityReturnDelta: false,
+                    afterRemoveLiquidityReturnDelta: false
+                })
+            );
     }
 
     function _beforeAddLiquidity(
@@ -60,23 +66,29 @@ contract CLCounterHook is CLBaseHook {
         bytes calldata
     ) internal override returns (bytes4, BalanceDelta) {
         afterAddLiquidityCount[key.toId()]++;
-        return (this.afterAddLiquidity.selector, BalanceDeltaLibrary.ZERO_DELTA);
+        return (
+            this.afterAddLiquidity.selector,
+            BalanceDeltaLibrary.ZERO_DELTA
+        );
     }
 
-    function _beforeSwap(address, PoolKey calldata key, ICLPoolManager.SwapParams calldata, bytes calldata)
-        internal
-        override
-        returns (bytes4, BeforeSwapDelta, uint24)
-    {
+    function _beforeSwap(
+        address,
+        PoolKey calldata key,
+        ICLPoolManager.SwapParams calldata,
+        bytes calldata
+    ) internal override returns (bytes4, BeforeSwapDelta, uint24) {
         beforeSwapCount[key.toId()]++;
         return (this.beforeSwap.selector, BeforeSwapDeltaLibrary.ZERO_DELTA, 0);
     }
 
-    function _afterSwap(address, PoolKey calldata key, ICLPoolManager.SwapParams calldata, BalanceDelta, bytes calldata)
-        internal
-        override
-        returns (bytes4, int128)
-    {
+    function _afterSwap(
+        address,
+        PoolKey calldata key,
+        ICLPoolManager.SwapParams calldata,
+        BalanceDelta,
+        bytes calldata
+    ) internal override returns (bytes4, int128) {
         afterSwapCount[key.toId()]++;
         return (this.afterSwap.selector, 0);
     }
