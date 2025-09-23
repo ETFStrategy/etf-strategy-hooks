@@ -19,7 +19,7 @@ contract StandardToken is ERC20, Ownable {
         string memory symbol_
     ) ERC20(name_, symbol_) Ownable(msg.sender) {
         _decimals = 18;
-        _mint(msg.sender, 1_000_000_000 * 10 ** _decimals); // Mint initial supply of 1 billion tokens
+        // No initial mint - tokens will be minted as needed
     }
 
     function decimals() public view override returns (uint8) {

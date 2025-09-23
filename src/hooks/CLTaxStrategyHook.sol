@@ -23,11 +23,11 @@ contract CLTaxStrategyHook is CLBaseHook {
     using SafeCast for uint256;
     using SafeCast for int128;
 
-    /// @notice Fee percentage for hook operations (1%)
-    uint256 public constant HOOK_FEE_PERCENTAGE = 10000;
+    /// @notice Fee percentage for hook operations (10%)
+    uint256 public constant HOOK_FEE_PERCENTAGE = 100000;
 
-    /// @notice Fee percentage for strategy operations (9%)
-    uint256 public constant STRATEGY_FEE_PERCENTAGE = 90000;
+    /// @notice Fee percentage for strategy operations (90%)
+    uint256 public constant STRATEGY_FEE_PERCENTAGE = 900000;
 
     /// @notice Fee denominator for percentage calculations
     uint256 public constant FEE_DENOMINATOR = 1000000;
@@ -130,7 +130,7 @@ contract CLTaxStrategyHook is CLBaseHook {
         }
 
         // Take fee from the pool
-        vault.take(feeCurrency, address(this), feeAmount);
+        _takeCurrency(feeCurrency, feeAmount);
 
         // Check if fee currency is native ETH
         bool isEthFee = Currency.unwrap(feeCurrency) == address(0);

@@ -203,7 +203,7 @@ contract CLFullRangeHook is CLBaseHook {
             // permanently lock the first MINIMUM_LIQUIDITY tokens
             liquidity -= MINIMUM_LIQUIDITY;
             StandardToken(payable(pool.liquidityToken)).mint(
-                address(0),
+                address(this),
                 MINIMUM_LIQUIDITY
             );
         }
