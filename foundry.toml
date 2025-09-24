@@ -5,3 +5,40 @@ libs = ["lib"]
 solc_version = '0.8.26'
 evm_version = 'cancun'
 via_ir = true
+gas_limit = 30000000
+gas_price = 3000000000
+
+# Network configurations
+[rpc_endpoints]
+bnb = "${BNB_RPC_URL}"
+base = "${BASE_RPC_URL}"
+bnb_testnet = "${BNB_TESTNET_RPC_URL}"
+
+[etherscan]
+bnb = { key = "${BSCSCAN_API_KEY}", url = "https://api.bscscan.com/api" }
+base = { key = "${BASESCAN_API_KEY}", url = "https://api.basescan.org/api" }
+bnb_testnet = { key = "${BSCSCAN_API_KEY}", url = "https://api-testnet.bscscan.com/api" }
+
+# Optimizer settings for deployment
+[profile.deploy]
+src = 'src'
+out = 'foundry-out'
+libs = ["lib"]
+solc_version = '0.8.26'
+evm_version = 'cancun'
+via_ir = true
+optimizer = true
+optimizer_runs = 1000000
+gas_limit = 30000000
+gas_price = 3000000000
+
+# Test profile with higher verbosity
+[profile.test]
+src = 'src'
+test = 'test'
+out = 'foundry-out'
+libs = ["lib"]
+solc_version = '0.8.26'
+evm_version = 'cancun'
+via_ir = true
+verbosity = 3
