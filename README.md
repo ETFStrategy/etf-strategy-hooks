@@ -6,10 +6,8 @@
 **Github — Hook**: https://github.com/ETFStrategy/etf-strategy-hooks  
 
 ---
-
-## Project Name  
-**ETFStrategy**  
-_Slogan: “Turn any token into a perpetual machine”_
+# ETFStrategy
+_“Turn any token into a perpetual machine”_
 
 ---
 
